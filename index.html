@@ -3,62 +3,164 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2k25 official</title>
-    <link rel="icon" href="2k25.jpeg" type="image/jpeg">
+    <title>2K25 Official - Coming Soon</title>
+    <link rel="icon" href="2k25_blue.ico" type="image/jpeg">
     <style>
         body {
-            font-family: Arial, sans-serif;
-            text-align: center;
             margin: 0;
-            padding: 0;
-            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            text-align: center;
         }
         .container {
-            margin: 50px auto;
+            max-width: 800px;
             padding: 20px;
-            width: 50%;
-            background-color: #fff;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
+            width: 90%;
         }
         h1 {
-            color: #333;
+            font-size: 3.5em;
+            margin: 0;
+            letter-spacing: 2px;
         }
         p {
-            color: #555;
-            font-size: 18px;
+            font-size: 1.2em;
+            margin: 20px 0;
         }
-        .button {
-            display: inline-block;
-            margin: 10px;
-            padding: 10px 20px;
-            background-color: #007BFF;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 5px;
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            font-size: 2em;
+            flex-wrap: wrap;
+        }
+        .countdown div {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 70px;
+        }
+        .countdown span {
+            font-size: 1.5em;
             font-weight: bold;
         }
-        .button:hover {
-            background-color: #0056b3;
+        .subscribe {
+            margin-top: 30px;
         }
-        embed {
-            width: 100%;
-            height: 500px;
+        .subscribe input {
+            padding: 10px;
+            font-size: 1em;
             border: none;
-            margin-top: 20px;
+            border-radius: 5px;
+            margin-right: 10px;
+            width: 100%;
+            max-width: 250px;
+            box-sizing: border-box;
+        }
+        .subscribe button {
+            padding: 10px 20px;
+            font-size: 1em;
+            border: none;
+            border-radius: 5px;
+            background: #ff9800;
+            color: white;
+            cursor: pointer;
+            transition: background 0.3s;
+            width: 100%;
+            max-width: 150px;
+            box-sizing: border-box;
+            margin-top: 10px;
+        }
+        .subscribe button:hover {
+            background: #e68900;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5em;
+            }
+            .countdown {
+                font-size: 1.5em;
+            }
+            .subscribe {
+                flex-direction: column;
+                align-items: center;
+            }
+            .subscribe input, .subscribe button {
+                margin: 5px 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2em;
+            }
+            p {
+                font-size: 1em;
+            }
+            .countdown {
+                font-size: 1.2em;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>2K25 Official</h1>
-        <p>Click the button below to view or download the book PDF.</p>
-
-        <!-- Link to Download the PDF -->
-        <a href="sample.pdf" download class="button">Download Book</a>
-
-        <!-- Embed PDF Viewer -->
-        <!-- <embed src="sample.pdf" type="application/pdf" /> -->
+        <p>We are building something amazing. Stay tuned!</p>
+        <div class="countdown" id="countdown">
+            <div>
+                <span id="days">00</span>
+                Days
+            </div>
+            <div>
+                <span id="hours">00</span>
+                Hours
+            </div>
+            <div>
+                <span id="minutes">00</span>
+                Minutes
+            </div>
+            <div>
+                <span id="seconds">00</span>
+                Seconds
+            </div>
+        </div>
+        <!-- <div class="subscribe">
+            <p>Subscribe to get notified:</p>
+            <form>
+                <input type="email" placeholder="Enter your email" required>
+                <button type="submit">Notify Me</button>
+            </form>
+        </div> -->
     </div>
+
+    <script>
+        const launchDate = new Date('January 1, 2025 00:00:00').getTime();
+
+        const countdownInterval = setInterval(() => {
+            const now = new Date().getTime();
+            const distance = launchDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('days').textContent = days;
+            document.getElementById('hours').textContent = hours;
+            document.getElementById('minutes').textContent = minutes;
+            document.getElementById('seconds').textContent = seconds;
+
+            if (distance < 0) {
+                clearInterval(countdownInterval);
+                document.querySelector('.countdown').innerHTML = '<p>We have launched! Stay tuned for updates.</p>';
+            }
+        }, 1000);
+    </script>
 </body>
 </html>
